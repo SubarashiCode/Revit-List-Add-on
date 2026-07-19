@@ -1,4 +1,5 @@
 param([ValidateSet('2025','2026','All')][string]$RevitVersion='All')
+$ErrorActionPreference='Stop'
 & (Join-Path $PSScriptRoot 'build.ps1') -RevitVersion $RevitVersion
 $versions = if($RevitVersion -eq 'All'){'2025','2026'}else{$RevitVersion}
 foreach($version in $versions){
@@ -10,4 +11,3 @@ foreach($version in $versions){
   $xml=$xml.Replace('<Assembly>ListAddin.dll</Assembly>',"<Assembly>$target\ListAddin.dll</Assembly>")
   Set-Content -Path $manifest -Value $xml -Encoding utf8
 }
-

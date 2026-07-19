@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>List</Name>
+    <Assembly>ListAddin.dll</Assembly>
+    <AddInId>148A2442-4722-4A63-91F8-86F11AE20FB0</AddInId>
+    <FullClassName>ListAddin.Ribbon.App</FullClassName>
+    <VendorId>AHMD</VendorId>
+    <VendorDescription>Ahmed Abdalla</VendorDescription>
+  </AddIn>
+</RevitAddIns>
+

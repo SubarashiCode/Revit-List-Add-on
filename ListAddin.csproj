@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>ListAddin</AssemblyName>
+    <RootNamespace>ListAddin</RootNamespace>
+    <Authors>Ahmed Abdalla</Authors>
+    <Company>Ahmed Abdalla</Company>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="RevitAPI"><HintPath>$(RevitInstallDir)\RevitAPI.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="RevitAPIUI"><HintPath>$(RevitInstallDir)\RevitAPIUI.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="bin\**;obj\**;Deploy\**" />
+    <EmbeddedResource Remove="bin\**;obj\**;Deploy\**" />
+    <None Remove="bin\**;obj\**;Deploy\**" />
+  </ItemGroup>
+</Project>

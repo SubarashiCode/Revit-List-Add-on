@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <RevitVersion Condition="'$(RevitVersion)' == ''">2025</RevitVersion>
+    <RevitInstallDir>C:\Program Files\Autodesk\Revit $(RevitVersion)</RevitInstallDir>
+    <BaseOutputPath>$(MSBuildThisFileDirectory)bin\Revit$(RevitVersion)\</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)obj\Revit$(RevitVersion)\</BaseIntermediateOutputPath>
+  </PropertyGroup>
+</Project>
+

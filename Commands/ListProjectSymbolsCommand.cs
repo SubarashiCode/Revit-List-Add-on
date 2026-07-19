@@ -22,11 +22,11 @@ public sealed class ListProjectSymbolsCommand : IExternalCommand
             {
                 tx.Start();
                 var styles=TextStyleManager.Ensure(doc);
-                var (source,seed)=LegendCollector.FindSeed(doc);
-                var families=LegendCollector.CollectCompatible(doc,seed);
-                if(families.Count==0) throw new InvalidOperationException("No family types accepted by the seed Legend Component were found.");
+                var source=LegendCollector.FindSourceLegend(doc);
+                var families=LegendCollector.CollectProjectSymbols(doc);
+                if(families.Count==0) throw new InvalidOperationException("No Generic Annotation family types are loaded in this project.");
                 var placements=LegendLayoutEngine.Layout(families);
-                pages=LegendViewBuilder.Build(doc,source,seed,placements,styles.Regular,styles.Heading);
+                pages=LegendViewBuilder.Build(doc,source,placements,styles.Regular,styles.Heading);
                 familyCount=families.Count; typeCount=families.Sum(f=>f.Types.Count);
                 tx.Commit();
             }
@@ -39,4 +39,3 @@ public sealed class ListProjectSymbolsCommand : IExternalCommand
         catch(Exception ex){group.RollBack();message=ex.Message;TaskDialog.Show("List Project Symbols",ex.Message);return Result.Failed;}
     }
 }
-

@@ -16,7 +16,7 @@ public sealed class App : IExternalApplication
             Assembly.GetExecutingAssembly().Location, "ListAddin.Commands.ListProjectSymbolsCommand")
         {
             ToolTip = "Create paginated legend views listing every compatible family symbol.",
-            LongDescription = "Lists family types accepted by Revit's Legend Component element, grouped alphabetically and laid out on 8.5 x 11 legend pages."
+            LongDescription = "Lists loaded Generic Annotation family types from Revit's Symbol command, grouped alphabetically and laid out on 8.5 x 11 legend pages."
         };
         var button = (PushButton)panel.AddItem(data);
         button.Image = IconFactory.Create(16);
@@ -45,4 +45,3 @@ internal static class IconFactory
         var image = new DrawingImage(group); image.Freeze(); return image;
     }
 }
-

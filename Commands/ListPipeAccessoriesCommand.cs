@@ -48,7 +48,7 @@ public sealed class ListPipeAccessoriesCommand : IExternalCommand
             group.Assimilate();
             uiDoc.ActiveView = fineView;
             TaskDialog.Show("List Pipe Accessories",
-                $"Created two Pipe Accessories-only floor plans:\n\n" +
+                $"Created two floor-plan catalogs of every loaded Pipe Accessory type:\n\n" +
                 $"Fine (double line): {fineView.Name}\n" +
                 $"Coarse (single line): {singleLineView.Name}");
             return Result.Succeeded;

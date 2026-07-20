@@ -35,8 +35,8 @@ public sealed class App : IExternalApplication
         var pipeAccessoryData = new PushButtonData("ListPipeAccessories", "List Pipe\nAccessories",
             Assembly.GetExecutingAssembly().Location, "ListAddin.Commands.ListPipeAccessoriesCommand")
         {
-            ToolTip = "Create Fine and single-line floor plans showing only Pipe Accessories.",
-            LongDescription = "Creates two floor plans from the active floor plan's level and extents. One uses Fine detail for double-line display; the other uses Coarse detail for single-line display. All categories except Pipe Accessories are hidden."
+            ToolTip = "Create Fine and single-line floor-plan catalogs of loaded Pipe Accessory types.",
+            LongDescription = "Places and labels one sample of every loaded Pipe Accessory family type in two floor plans. One uses Fine detail for double-line display; the other uses Coarse detail for single-line display. Unrelated model categories are hidden."
         };
         var pipeAccessoryButton = (PushButton)panel.AddItem(pipeAccessoryData);
         pipeAccessoryButton.Image = IconFactory.Create(16, "P");

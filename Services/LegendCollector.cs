@@ -22,4 +22,12 @@ public static class LegendCollector
             .Select(g => new FamilyGroup(g.Key, g.Select(s => new FamilyTypeItem(s.Id, s.Name)).ToList()))
             .OrderBy(g => g.FamilyName, StringComparer.CurrentCultureIgnoreCase).ToList();
     }
+
+    public static IReadOnlyList<FilledRegionItem> CollectFilledRegions(Document doc)
+    {
+        return new FilteredElementCollector(doc).OfClass(typeof(FilledRegionType)).Cast<FilledRegionType>()
+            .Select(type => new FilledRegionItem(type.Id, type.Name))
+            .OrderBy(type => type.TypeName, StringComparer.CurrentCultureIgnoreCase)
+            .ToList();
+    }
 }

@@ -1,6 +1,11 @@
 # List Add-in for Revit 2025 and 2026
 
-Creates a **List** ribbon tab, a **Documentation** panel, and a **List Project Symbols** command. The command builds alphabetized, paginated 8.5 x 11 Legend views containing loaded Generic Annotation symbols and their type names.
+Creates a **List** ribbon tab and a **Documentation** panel with two commands:
+
+- **List Project Symbols** builds alphabetized Legend pages containing loaded Generic Annotation symbols and their type names.
+- **List Filled Regions** builds alphabetized Legend pages containing a sample of every Filled Region type and its type name.
+
+Both commands use the same paginated 8.5 x 11 system.
 
 ## Build and install
 
@@ -15,7 +20,7 @@ Revit must be restarted after installation. Output is built separately against t
 
 The Revit API cannot create a project's first Legend view directly. Before the first run, the project must contain one Legend view. It may be completely empty: no Legend Component or seed symbol is required. The command duplicates that view and places loaded `OST_GenericAnnotation` family types, matching Revit's **Symbol** command rather than the Legend Component picker.
 
-The source Legend is never modified. Generated pages are named `Project Symbol List 01`, `02`, and so on.
+The source Legend is never modified. Symbol pages are named `Project Symbol List 01`, `02`, and so on; Filled Region pages are named `Filled Region List 01`, `02`, and so on.
 
 ## Layout
 

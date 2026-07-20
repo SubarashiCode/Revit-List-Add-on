@@ -31,6 +31,16 @@ public sealed class App : IExternalApplication
         var filledRegionButton = (PushButton)panel.AddItem(filledRegionData);
         filledRegionButton.Image = IconFactory.Create(16, "F");
         filledRegionButton.LargeImage = IconFactory.Create(32, "F");
+
+        var pipeAccessoryData = new PushButtonData("ListPipeAccessories", "List Pipe\nAccessories",
+            Assembly.GetExecutingAssembly().Location, "ListAddin.Commands.ListPipeAccessoriesCommand")
+        {
+            ToolTip = "Create Fine and single-line floor plans showing only Pipe Accessories.",
+            LongDescription = "Creates two floor plans from the active floor plan's level and extents. One uses Fine detail for double-line display; the other uses Coarse detail for single-line display. All categories except Pipe Accessories are hidden."
+        };
+        var pipeAccessoryButton = (PushButton)panel.AddItem(pipeAccessoryData);
+        pipeAccessoryButton.Image = IconFactory.Create(16, "P");
+        pipeAccessoryButton.LargeImage = IconFactory.Create(32, "P");
         return Result.Succeeded;
     }
 

@@ -64,7 +64,8 @@ public static class PipeAccessoryPlanBuilder
 
             var column = index % columnCount;
             var row = index / columnCount;
-            var point = new XYZ(column * columnSpacing, -row * rowSpacing, level.Elevation);
+            // The level overload interprets Z as the instance's offset from its assigned level.
+            var point = new XYZ(column * columnSpacing, -row * rowSpacing, 0.0);
             if (placeSamples)
                 PlaceSample(doc, view, level, symbol, point);
             var label = string.Format("{0}\n{1}", symbol.FamilyName, symbol.Name);
@@ -75,8 +76,8 @@ public static class PipeAccessoryPlanBuilder
         var rowCount = (int)Math.Ceiling(symbols.Count / (double)columnCount);
         var crop = new BoundingBoxXYZ
         {
-            Min = new XYZ(-3.0, -(rowCount - 1) * rowSpacing - 3.5, level.Elevation - 10.0),
-            Max = new XYZ((columnCount - 1) * columnSpacing + 5.0, 3.0, level.Elevation + 10.0)
+            Min = new XYZ(-3.0, -(rowCount - 1) * rowSpacing - 3.5, -10.0),
+            Max = new XYZ((columnCount - 1) * columnSpacing + 5.0, 3.0, 10.0)
         };
         view.CropBox = crop;
         view.CropBoxActive = true;
@@ -90,7 +91,8 @@ public static class PipeAccessoryPlanBuilder
         {
             case FamilyPlacementType.OneLevelBased:
             case FamilyPlacementType.TwoLevelsBased:
-                doc.Create.NewFamilyInstance(point, symbol, level, StructuralType.NonStructural);
+                var instance = doc.Create.NewFamilyInstance(point, symbol, level, StructuralType.NonStructural);
+                SetZeroLevelOffset(instance);
                 break;
             case FamilyPlacementType.ViewBased:
                 doc.Create.NewFamilyInstance(point, symbol, view);
@@ -99,6 +101,21 @@ public static class PipeAccessoryPlanBuilder
                 throw new InvalidOperationException(string.Format(
                     "Pipe Accessory type '{0}: {1}' uses unsupported placement type '{2}'.",
                     symbol.FamilyName, symbol.Name, symbol.Family.FamilyPlacementType));
+        }
+    }
+
+    private static void SetZeroLevelOffset(FamilyInstance instance)
+    {
+        var offsetParameters = new[]
+        {
+            BuiltInParameter.INSTANCE_ELEVATION_PARAM,
+            BuiltInParameter.INSTANCE_FREE_HOST_OFFSET_PARAM
+        };
+        foreach (var builtInParameter in offsetParameters)
+        {
+            var parameter = instance.get_Parameter(builtInParameter);
+            if (parameter != null && !parameter.IsReadOnly && parameter.StorageType == StorageType.Double)
+                parameter.Set(0.0);
         }
     }
 
